@@ -18,6 +18,8 @@ code-fold: true
 ```{r}
 #| label: setup
 
+library(gt)
+library(kableExtra)
 library(knitr)
 library(tidyverse)
 
@@ -66,6 +68,7 @@ that--it converts a vector to a data frame.
 
 You may find the following code helpful:
 
+ChatGBT Link: 
 
 ```{r}
 #| label: table-for-random-babies
@@ -80,7 +83,17 @@ babyData |>
   mutate(proportions = n / sum(n)) |> 
   select(ncorrect, proportions) |>
   pivot_wider(names_from = ncorrect,
-              values_from = proportions)
+              values_from = proportions) |>
+  gt() |>
+  
+  tab_header(title = 'Proportion of Simulations for Correctly Returned Babies') |>
+  cols_label(`0` = '0 Babies',
+             `1` = '1 Baby',
+             `2` = '2 Babies',
+             `4` = '4 Babies') |>
+ 
+   tab_options(table.font.size = 12,
+               table.font.names = 'Georgia')
 
 ```
 
